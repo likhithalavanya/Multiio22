@@ -1,0 +1,57 @@
+Creating an Instance with AWS Linux Operating system and deploying the website.
+Step 1: Creating an custom vpc:
+1.	Log in to AWS Management Console and navigate to VPC service.
+2.	Create VPC:
+•	Go to "Your VPCs" > Create VPC.
+•	Provide a name tag (e.g., vpc-1) and the IPv4 CIDR block (e.g., 10.0.0.0/16).
+•	Click Create VPC.
+3.	Create Subnet:
+•	Navigate to "Subnets" > Create subnet.
+•	Choose the custom VPC you just created and name, IPv4 CIDR block (e.g., 10.0.1.0/24).
+•	Enable Auto-Assign Public IP for Subnet
+•	Click Create Subnet.
+4.	Create and Attach an Internet Gateway:
+•	Navigate to "Internet Gateways" > Create internet gateway.
+•	Name the gateway and click Create.
+•	Select the internet gateway and click Actions > Attach to VPC.
+•	Choose your custom VPC and attach it.
+5.	Update the Route Table:
+•	Go to "Route Tables", locate the route table associated with your VPC, and select it.
+•	Click Routes > Edit routes.
+	Add a new route: Destination: 0.0.0.0/0 and Target: Internet Gateway (select the one you created).
+•	Save the changes.
+
+
+Step 2: Launch EC2 Instance in the Custom VPC:
+1.	Open EC2 Dashboard > Launch Instances.
+2.	Configure Instance Details:
+•	Choose an Amazon Machine Image (AMI).
+•	Select the instance type (e.g., t2.micro).
+•	In Network Settings: Select the custom VPC (vpc-1), Choose the subnet (10.0.1.0/24) and enable "Auto-assign Public IP".
+3.	Create or select a security group:
+•	Add rules: SSH (port 22) for your IP (for SSH access) and HTTP (port 80) if hosting a web server.
+4.	Review and Launch:
+•	Review your configuration and click Launch.
+•	Choose or create a key pair for SSH access and download it.
+
+
+Step 3: Connect the instance and Deploy the website:
+1.	Connect the instance:
+•	Select your instance(MultiioPro).
+•	Click on Connect.
+
+
+Here are the few commands we generally used in Linux to deploy the website #sudo su
+#yum install httpd
+Enter y #yum install git
+Enter y #systemctl start httpd #cd /
+#git clone <git hub link>
+#mv <move all the files related to website> /var/www/html/ #cd /var/www/html/
+#ls
+#systemctl start httpd
+
+
+
+2.	Deploy the website:
+•	New tab will be opened and run the above commands using git repository link.
+•	To open the website use public ip assigned to your instance (MultiioPro).
